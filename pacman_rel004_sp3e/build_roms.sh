@@ -15,6 +15,19 @@
 #
 #echo done
 
+
+# mv 82s123.7f  pacrom_7f.bin
+# mv 82s126.1m  pacrom_1m.bin
+# mv 82s126.3m  pacrom_3m.bin  # unused ?
+# mv 82s126.4a  pacrom_4a.bin
+# mv namcopac.6e  pacrom_6e.bin
+# mv namcopac.6f  pacrom_6f.bin
+# mv namcopac.6h  pacrom_6h.bin
+# mv namcopac.6j  pacrom_6j.bin
+# mv pacman.5e  pacrom_5e.bin
+# mv pacman.5f  pacrom_5f.bin
+
+
 # Be sure to build the romgen executable on your system, e.g. 
 #  cd romgen_source/ ; g++ romgen.cpp -o romgen
 
@@ -33,3 +46,5 @@ $romgen_path/romgen $rom_path/pacrom_4a.bin PACROM_4A_DST 8 c > $rom_path/pacrom
 $romgen_path/romgen $rom_path/pacrom_7f.bin PACROM_7F_DST 4 c > $rom_path/pacrom_7f_dst.vhd
 
 echo done
+
+
