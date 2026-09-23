@@ -16,23 +16,29 @@
 #echo done
 
 
-# mv 82s123.7f  pacrom_7f.bin
-# mv 82s126.1m  pacrom_1m.bin
-# mv 82s126.3m  pacrom_3m.bin  # unused ?
-# mv 82s126.4a  pacrom_4a.bin
-# mv namcopac.6e  pacrom_6e.bin
-# mv namcopac.6f  pacrom_6f.bin
-# mv namcopac.6h  pacrom_6h.bin
-# mv namcopac.6j  pacrom_6j.bin
-# mv pacman.5e  pacrom_5e.bin
-# mv pacman.5f  pacrom_5f.bin
-
-
 # Be sure to build the romgen executable on your system, e.g. 
 #  cd romgen_source/ ; g++ romgen.cpp -o romgen
 
 rom_path=roms
 romgen_path=romgen_source
+
+# uncomment to use actual puckman roms
+USE_PUCK_ROMS=1
+if [ ! -z $USE_PUCK_ROMS ]
+then
+  echo "Using roms in $rom_path/puckman ......."
+  cp $rom_path/puckman/82s123.7f  $rom_path/pacrom_7f.bin
+  cp $rom_path/puckman/82s126.1m  $rom_path/pacrom_1m.bin
+  cp $rom_path/puckman/82s126.3m  $rom_path/pacrom_3m.bin  # unused ?
+  cp $rom_path/puckman/82s126.4a  $rom_path/pacrom_4a.bin
+  cp $rom_path/puckman/namcopac.6e  $rom_path/pacrom_6e.bin
+  cp $rom_path/puckman/namcopac.6f  $rom_path/pacrom_6f.bin
+  cp $rom_path/puckman/namcopac.6h  $rom_path/pacrom_6h.bin
+  cp $rom_path/puckman/namcopac.6j  $rom_path/pacrom_6j.bin
+  cp $rom_path/puckman/pacman.5e  $rom_path/pacrom_5e.bin
+  cp $rom_path/puckman/pacman.5f  $rom_path/pacrom_5f.bin
+fi
+
 
 $romgen_path/romgen $rom_path/pacrom_5e.bin PACROM_5E 12 l r e > $rom_path/pacrom_5e.vhd
 $romgen_path/romgen $rom_path/pacrom_5f.bin PACROM_5F 12 l r e > $rom_path/pacrom_5f.vhd

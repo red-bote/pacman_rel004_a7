@@ -59,11 +59,10 @@ begin
     O_PMODAMP2_GAIN <= sw(15);
 
     --btns <= btnD & btnU & btnR & btnL;
---    btns <= JA;
-    btns(0) <= not JA(0);
-    btns(1) <= not JA(1);
-    btns(2) <= not JA(2);
-    btns(3) <= not JA(3);
+    btns(0) <= not JA(3); -- up
+    btns(1) <= not JA(2); -- down
+    btns(2) <= not JA(1); -- left
+    btns(3) <= not JA(0); -- right
 
     reset <= btnC;
 
