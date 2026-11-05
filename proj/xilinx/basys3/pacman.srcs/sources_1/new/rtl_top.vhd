@@ -50,13 +50,14 @@ architecture Behavioral of rtl_top is
 
     signal btns : std_logic_vector(4 downto 0);
     signal reset : std_logic;
+    signal pacman_sw : std_logic_vector(3 downto 0);
 
 begin
 
-    -- active-low shutdown pin
-    O_PMODAMP2_SHUTD <= sw(14);
-    -- gain pin is driven high there is a 6 dB gain, low is a 12 dB gain 
-    O_PMODAMP2_GAIN <= sw(15);
+    -- active-low shutdown pin; sw14 up = enabled
+    O_PMODAMP2_SHUTD <= not sw(14);
+    -- gain fixed at the lower of the two levels (high = 6 dB, low = 12 dB)
+    O_PMODAMP2_GAIN <= '1';
 
     --btns <= btnD & btnU & btnR & btnL;
     btns(0) <= not JA(3); -- up
@@ -65,6 +66,11 @@ begin
     btns(3) <= not JA(0); -- right
 
     reset <= btnC;
+
+    pacman_sw(0) <= not sw(13);   -- video mode: down = doubled VGA, up = native 15 kHz
+    pacman_sw(1) <= btnL;         -- start 1
+    pacman_sw(2) <= btnR;         -- start 2
+    pacman_sw(3) <= btnU or btnD; -- coin/credit
 
 u_pacman : entity work.PACMAN
   port map (
@@ -77,7 +83,7 @@ u_pacman : entity work.PACMAN
     O_AUDIO_L             => O_PMODAMP2_AIN,
     O_AUDIO_R             => open,
     --
-    I_SW                  => sw(3 downto 0),
+    I_SW                  => pacman_sw,
     I_BUTTON              => btns(3 downto 0),
     O_LED                 => led,
     --
